@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>Tmall</title>
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" th:href="@{/css/slick.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/slick-theme.css}"/>
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" th:href="@{/css/nouislider.min.css}"/>
+
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" th:href="@{/css/style.css}"/>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/slick.min.js}"></script>
+    <script th:src="@{/js/nouislider.min.js}"></script>
+    <script th:src="@{/js/jquery.zoom.min.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+
+</head>
+<body>
+<!-- HEADER -->
+<header>
+    <!-- TOP HEADER -->
+    <div id="top-header">
+        <div class="container" th:if="${session.user} == null">
+            <ul class="header-links pull-right">
+                <li><a th:href="@{/toManagerLogin}" ><i class="fa fa-user-o"></i> login</a></li>
+            </ul>
+        </div>
+        <div class="container" th:if="${session.user} != null">
+            <ul class="header-links pull-right">
+                <li><a th:href="@{/user/managerLogout}" ><i class="fa fa-user-o"></i> logout</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /TOP HEADER -->
+
+    <!-- MAIN HEADER -->
+    <div id="header">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <!-- LOGO -->
+                <div class="col-md-6">
+                    <div class="header-logo">
+                        <a th:href="@{/manager}" class="logo" style="font-size: 45px;color: #FFF;">
+                            Tmall Manager
+                        </a>
+                    </div>
+                </div>
+                <!-- /LOGO -->
+
+            </div>
+            <!-- row -->
+        </div>
+        <!-- container -->
+    </div>
+    <!-- /MAIN HEADER -->
+</header>
+
+<div class="row" style="margin: 30px 0px 30px 0px">
+    <div class="col-md-3 col-md-offset-4">
+        <form class="form-horizontal" role="form" th:action="@{/manager/saveProduct}" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="id" th:if="${session.product} != null" th:value="${session.product.id}" >
+            <div class="form-group" >
+                <label class="col-sm-2 control-label">类别编号</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control"
+                           placeholder="请输入类别编号" name="category_id" th:value="${session.product.category_id}" >
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">名称</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control"
+                           placeholder="请输入名称" name="name" th:value="${session.product.name}" >
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">标题</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control"
+                           placeholder="请输入标题" name="subTitle" th:value="${session.product.subTitle}" >
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">图片</label>
+                <div class="col-sm-10">
+                    <input type="file"  name="main_image" >
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">价格</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control"
+                           placeholder="请输入价格" name="price" th:value="${session.product.price}" >
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">类别库存</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control"
+                           placeholder="请输入库存" name="stock" th:value="${session.product.stock}" >
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">状态</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control"
+                           placeholder="请输入状态" name="status" th:value="${session.product.status}" >
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default">提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer id="footer">
+    <!-- bottom footer -->
+    <div id="bottom-footer" class="section">
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    Tmall by Gao CunDe
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /bottom footer -->
+</footer>
+<!-- /FOOTER -->
+
+
+</body>
+</html>

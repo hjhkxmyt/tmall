@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/tmall
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123
+  thymeleaf:
+    mode: HTML5
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    cache: false
+    enabled: true
+
